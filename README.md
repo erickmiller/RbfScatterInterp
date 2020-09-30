@@ -11,13 +11,13 @@ This is a self contained C++ library for using Radial Basis Function based N-dim
 Using it is easy.  Just include it and initialize the RbfScatterInterp (look at the three versions of the constructor):
 
 All versions of the constructor require you pass in two arguments: 
-1) **&pts** A reference to a vector of vectors of doubles (these are your ND vectors)
+1) **&pts** Is a reference to a vector of vectors of doubles (these are your ND vectors)
 ```cpp
 vector<vector<double> > &pts
 ```
 The first argument, pts, is your mulit-dimensional vector space.  The number of dimensionss of your vectors space is determined by the length of each vector conained within the vector of vectors.   The number of vectors (or the length of the outside vector) represents how many data points you will be using in the interpolate and thus also defines the spacial stability of your space.  If you imagine wanting to interpolate in stable manner in a 3D space, then you would want to have enough 3D vectors to represent a stable space, thus you'd want at a minimum the equivalent of the Cartesian axis to be defined which would simply be 3 vectors of X, Y and Z.  For an even more stable interpolation, perhaps you'd want to define the space using each row/column (depending on transposition) of a transformation matrix as the vector of your space, so you could capture rotation and scale somewhat more accurately during interpolation.
 
-2) **&values** a reference to a vector of doubles
+2) **&values** Is a reference to a vector of doubles
 ```cpp
 vector<double> &values
 ```

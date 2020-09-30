@@ -12,7 +12,7 @@ Using it is easy.  Just include it and initialize the RbfScatterInterp (look at 
 
 All versions of the constructor require you pass in two arguments: 
 1) pts: A reference to a vector of vectors of doubles (these are your ND vectors)
-``cpp
+```cpp
 vector<vector<double> > &pts
 ```
 2) values: a reference to a vector of doubles

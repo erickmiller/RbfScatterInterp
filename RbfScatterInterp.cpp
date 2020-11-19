@@ -61,48 +61,55 @@ using namespace std;
 class RbfScatterInterp
 { 
     public:
-        RbfScatterInterp( vector<vector<double> > &pts,  
-            vector<double> &values, double sigma_mult, double reg);
-        RbfScatterInterp(vector<vector<double> > &pts, 
-                        vector<double> &values, double sigma_mult);
-        RbfScatterInterp(vector<vector<double> > &pts,  
-                                    vector<double> &values );
+        RbfScatterInterp( vector<vector<double> > &pts,
+			 vector<double> &values, 
+			 double sigma_mult, double reg);
+	
+        RbfScatterInterp(vector<vector<double> > &pts,
+			 vector<double> &values, double sigma_mult);
+	
+        RbfScatterInterp(vector<vector<double> > &pts,
+			 vector<double> &values );
+	
         virtual ~RbfScatterInterp();
+	
         void 	setup(vector<vector<double> > &pts, 
-                        vector<double> &values, double &width, double &reg);
+                        vector<double> &values, 
+		      double &width, double &reg);
+	
         double 	interp(vector<double> &curr_pts);
 
     private: 
         double  distN(unsigned &a, unsigned &b, vector<vector<double> > &pts);
         double 	solve(vector<double> &M, vector<double> &b );
         double  computeSigma(vector<vector<double> > &pts ) ;
-        unsigned				  _nd; 
-        unsigned				  _npts;
-        vector<vector<double> >	  _pts;
-        vector<double>			  _w;
-        double				  _msigma2;
+        unsigned 			_nd; 
+        unsigned 			_npts;
+        vector<vector<double> >	  	_pts;
+        vector<double> 			_w;
+        double 				_msigma2;
 };
 
 
-RbfScatterInterp::RbfScatterInterp( vector<vector<double> > &pts,  
-									vector<double> &values, 
-									double sigma_mult, double reg) {
+RbfScatterInterp::RbfScatterInterp( vector<vector<double> > &pts, 
+				   vector<double> &values, 
+				   double sigma_mult, double reg) {
 	double width = computeSigma(pts);
 	width = width * sigma_mult ;
 	setup(pts,values,width,reg);
 }
 
-RbfScatterInterp::RbfScatterInterp( vector<vector<double> > &pts,  
-									vector<double> &values, 
-									double sigma_mult) {
+RbfScatterInterp::RbfScatterInterp( vector<vector<double> > &pts,
+				   vector<double> &values, 
+				   double sigma_mult) {
 	double width = computeSigma(pts);
 	width = width * sigma_mult ;
 	double reg = 0.01 ;	
 	setup(pts,values,width,reg);
 }
 
-RbfScatterInterp::RbfScatterInterp( vector<vector<double> > &pts,  
-									vector<double> &values ) {
+RbfScatterInterp::RbfScatterInterp( vector<vector<double> > &pts,
+				   vector<double> &values ) {
 	double width = computeSigma(pts);
 	double reg = 0.01 ;
 	setup(pts,values,width,reg);
@@ -131,8 +138,8 @@ RbfScatterInterp::~RbfScatterInterp(){
 * lienar algebra holds true for N-dimensional points and vectors
 * --> N-D case simply splits each N into seperate 1D systems.
 */
-void RbfScatterInterp::setup(vector<vector<double> > &pts,  
-					vector<double> &values, double &width, double &reg){
+void RbfScatterInterp::setup(vector<vector<double> > &pts,
+			     vector<double> &values, double &width, double &reg){
 		_npts = ((unsigned)pts.size());
 		if(_npts == values.size() && _npts>0 ){ 
 		_pts = pts;
@@ -190,8 +197,8 @@ double RbfScatterInterp::interp(vector<double> &curr_pts){
 /**
 * Return distance (w/ out square root) between n-dimensional points a,b
 */
-double RbfScatterInterp::distN(unsigned &a, unsigned &b, 
-								  vector<vector<double> > &pts ){
+double RbfScatterInterp::distN(unsigned &a, unsigned &b,
+			       vector<vector<double> > &pts ){
 	double sum_squared = 0.0;
 	for( unsigned n=0; n < pts[a].size(); n++ ){
 		sum_squared += RBF_SCATTER_SQUARE( pts[a][n] - pts[b][n] );

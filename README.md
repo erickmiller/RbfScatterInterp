@@ -6,7 +6,7 @@ Purpose: Radial Basis Function based interpolation in unlimited multi-dimensiona
 
 Dependencies:  None. Standard C++ libraries. Algo and math are all self contained.
 
-This is a self contained C++ library for using Radial Basis Function based N-dimensional scattered data interpolation for interpolating between unlimited multi-dimensional vectors in ND space (solver uses Gaussian elimination with partial pivoting, which I found was more stable and smother than thin plate splines which caused more overshooting and tangent space issues)
+This is a self contained C++ library for using Radial Basis Function based N-dimensional scattered data interpolation for interpolating between unlimited multi-dimensional vectors in ND space (solver uses Gaussian elimination with partial pivoting, which I found was more stable and smoother than thin plate splines which caused more overshooting and tangent space issues)
 
 Using it is easy.  Just include it and initialize the RbfScatterInterp (look at the three versions of the constructor):
 
